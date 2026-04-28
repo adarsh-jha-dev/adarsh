@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# adarsh
 
-## Getting Started
+My personal site. Built with Next.js 15, TypeScript, Tailwind, and Motion.
+Terminal-coded aesthetic, command palette, MDX blog, live GitHub stats.
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+$ whoami
+adarsh-jha-dev
+$ cat role.txt
+full-stack engineer
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## quick start
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm install   # or npm install / yarn
+pnpm dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Open [http://localhost:3000](http://localhost:3000).
 
-## Learn More
+## features
 
-To learn more about Next.js, take a look at the following resources:
+- **terminal hero** with a typewriter intro
+- **command palette** (`⌘K` / `Ctrl+K`) to jump anywhere
+- **project case studies** — every project gets its own page with problem / approach / learnings
+- **MDX blog** with RSS feed at `/rss.xml`
+- **live GitHub stats** pulled from the public API (cached for an hour)
+- **/uses** and **/now** pages
+- **contact form** wired to Resend
+- **SEO**: sitemap, robots, OG metadata, semantic HTML
+- **CRT scanlines** because terminal aesthetic earns them
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+src/
+├── app/                     # next.js app router
+│   ├── api/contact/         # email endpoint
+│   ├── projects/[slug]/     # project case studies
+│   ├── blog/[slug]/         # mdx blog
+│   ├── uses/                # tools page
+│   ├── now/                 # what i'm focused on
+│   ├── sitemap.ts
+│   ├── robots.ts
+│   └── rss.xml/route.ts
+├── components/              # ui + sections
+├── content/posts/           # mdx blog posts
+└── lib/
+    ├── config.ts            # site config — edit me first
+    ├── projects.ts          # project data
+    └── posts.ts             # mdx loader
+```
 
-## Deploy on Vercel
+## customizing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. `src/lib/config.ts` — your name, email, socials, education
+2. `src/lib/projects.ts` — edit / add projects
+3. `src/content/posts/*.mdx` — drop in blog posts as MDX
+4. `public/cv/Adarsh_Resume.pdf` — drop your CV here (linked from the hero)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## environment variables
+
+Copy `.env.example` to `.env.local` and fill in:
+
+- `RESEND_API_KEY` — for the contact form ([resend.com](https://resend.com), free tier)
+- `CONTACT_TO` — where messages should land
+- `GITHUB_TOKEN` — optional, raises GitHub API rate limits
+
+The site runs without any of these (form falls back to a console log in dev).
+
+## deploying
+
+1. Push to GitHub as a repo named `adarsh`
+2. Import into [Vercel](https://vercel.com/new)
+3. Add the environment variables in Project Settings
+4. Deploy
+
+The auto-assigned domain will be `adarsh-<your-username>.vercel.app` (or
+similar, depending on availability).
+
+## license
+
+MIT — feel free to fork the structure for your own site, but please
+write your own copy.
