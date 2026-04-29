@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "avatars.githubusercontent.com" },
       { protocol: "https", hostname: "raw.githubusercontent.com" },
       { protocol: "https", hostname: "i.scdn.co" },
+      { protocol: "https", hostname: "lastfm.freetls.fastly.net" },
     ],
   },
 };
