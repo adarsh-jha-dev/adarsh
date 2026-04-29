@@ -111,7 +111,7 @@ export async function GitHubStats() {
           <span className="text-ink">log --stat</span>
         </h2>
 
-        <div className="grid md:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {/* Stat block */}
           <div className="bg-bg-elev border border-line p-5">
             <div className="text-xs text-ink-mute mb-3">// counters</div>

@@ -23,7 +23,7 @@ export function Nav() {
           <span className="cursor" />
         </Link>
 
-        <nav className="flex items-center gap-1 text-xs">
+        <nav className="flex items-center gap-0.5 sm:gap-1 text-xs overflow-x-auto">
           {navItems.map((item) => {
             const active =
               item.href === "/"
@@ -34,7 +34,7 @@ export function Nav() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "px-3 py-1.5 rounded transition-colors",
+                  "px-2 sm:px-3 py-1.5 rounded transition-colors whitespace-nowrap",
                   active
                     ? "text-accent bg-bg-elev"
                     : "text-ink-dim hover:text-ink hover:bg-bg-elev"

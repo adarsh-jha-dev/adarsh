@@ -13,7 +13,7 @@ export function About() {
   return (
     <section className="py-20 border-t border-line">
       <div className="mx-auto max-w-5xl px-6">
-        <div className="grid md:grid-cols-[1fr_2fr] gap-10 md:gap-16">
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-10 md:gap-16">
           <div>
             <div className="text-xs text-ink-mute mb-2">// section</div>
             <h2 className="text-2xl font-medium">about.md</h2>
@@ -49,7 +49,7 @@ export function About() {
             </p>
 
             {/* Stack grid */}
-            <div className="pt-6 grid grid-cols-2 gap-x-8 gap-y-5 text-xs">
+            <div className="pt-6 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-x-8 sm:gap-y-5 text-xs">
               {Object.entries(stack).map(([key, items]) => (
                 <div key={key}>
                   <div className="text-ink-mute mb-2">

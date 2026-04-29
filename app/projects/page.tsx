@@ -26,7 +26,7 @@ export default function ProjectsPage() {
           {projects.length} entries · sorted by recency
         </div>
 
-        <div className="mt-10 grid md:grid-cols-2 gap-5">
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-5">
           {projects.map((p) => (
             <ProjectCard key={p.slug} project={p} />
           ))}

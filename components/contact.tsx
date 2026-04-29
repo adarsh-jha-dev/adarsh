@@ -44,7 +44,7 @@ export function Contact() {
   return (
     <section className="py-20 border-t border-line">
       <div className="mx-auto max-w-5xl px-6">
-        <div className="grid md:grid-cols-[1fr_1.2fr] gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_1.2fr] gap-8 md:gap-12">
           <div>
             <div className="text-xs text-ink-mute mb-2">// section</div>
             <h2 className="text-2xl font-medium">

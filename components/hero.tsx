@@ -57,7 +57,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="font-mono text-5xl md:text-7xl lg:text-8xl font-medium tracking-tight leading-none"
+          className="font-mono text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-medium tracking-tight leading-none"
         >
           <span className="text-ink-mute">&gt; </span>
           <span className="text-ink">adarsh</span>
