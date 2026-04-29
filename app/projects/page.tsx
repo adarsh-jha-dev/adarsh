@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { projects } from "@/lib/projects";
-import { ProjectCard } from "@/components/project-card";
+import { DraggableProjectsGrid } from "@/components/draggable-projects-grid";
 
 export const metadata: Metadata = {
   title: "Projects",
@@ -18,18 +18,12 @@ export default function ProjectsPage() {
           <span className="cursor" />
         </h1>
         <p className="mt-4 text-sm text-ink-dim max-w-xl leading-relaxed">
-          A few things I've built. Each card opens a case study with the
-          problem, my approach, and what I'd do differently next time.
+          A few things I&apos;ve built. Each card opens a case study with the
+          problem, my approach, and what I&apos;d do differently next time.
         </p>
 
-        <div className="mt-6 text-xs text-ink-mute">
-          {projects.length} entries · sorted by recency
-        </div>
-
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-5">
-          {projects.map((p) => (
-            <ProjectCard key={p.slug} project={p} />
-          ))}
+        <div className="mt-10">
+          <DraggableProjectsGrid initialProjects={projects} />
         </div>
       </div>
     </section>

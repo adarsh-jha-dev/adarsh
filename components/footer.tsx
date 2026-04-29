@@ -2,6 +2,8 @@ import Link from "next/link";
 import { siteConfig } from "@/lib/config";
 import { Mail } from "lucide-react";
 import { GithubIcon, LinkedinIcon, TwitterIcon } from "@/components/icons";
+import { NowPlaying } from "@/components/now-playing";
+import { VisitorCounter } from "@/components/visitor-counter";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -82,17 +84,25 @@ export function Footer() {
                 <span>{"</>"}</span> view source
               </a>
             </div>
+
+            <div className="mt-4">
+              <div className="text-ink-mute mb-2"># now playing</div>
+              <NowPlaying />
+            </div>
           </div>
         </div>
 
-        <div className="mt-10 pt-6 border-t border-line flex items-center justify-between text-[10px] text-ink-mute">
+        <div className="mt-10 pt-6 border-t border-line flex flex-wrap items-center justify-between gap-3 text-[10px] text-ink-mute">
           <span>
             © {year} {siteConfig.name}. built with next.js, deployed on vercel.
           </span>
-          <span className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-            online
-          </span>
+          <div className="flex items-center gap-4">
+            <VisitorCounter />
+            <span className="flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+              online
+            </span>
+          </div>
         </div>
       </div>
     </footer>

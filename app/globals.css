@@ -154,6 +154,48 @@
   }
 }
 
+/* ─── Terminal Mode ──────────────────────────────────────────── */
+[data-terminal="true"] body {
+  background: #000 !important;
+  color: #00ff41 !important;
+}
+[data-terminal="true"] .grid-bg {
+  background-image:
+    linear-gradient(rgba(0, 255, 65, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 65, 0.08) 1px, transparent 1px);
+}
+[data-terminal="true"] .crt::before {
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0) 0px,
+    rgba(0, 0, 0, 0) 1px,
+    rgba(0, 255, 65, 0.04) 2px,
+    rgba(0, 0, 0, 0) 3px
+  );
+  animation: flicker 2s infinite;
+}
+[data-terminal="true"] * {
+  text-shadow: 0 0 6px rgba(0, 255, 65, 0.5) !important;
+  border-color: rgba(0, 255, 65, 0.2) !important;
+}
+[data-terminal="true"] .bg-bg\/85,
+[data-terminal="true"] header {
+  background: rgba(0, 0, 0, 0.92) !important;
+}
+
+/* ─── Confetti ──────────────────────────────────────────────── */
+@keyframes confetti-fall {
+  0%   { transform: translateY(-10px) rotate(0deg) scale(1); opacity: 1; }
+  80%  { opacity: 1; }
+  100% { transform: translateY(105vh) rotate(800deg) scale(0.5); opacity: 0; }
+}
+@keyframes confetti-drift {
+  0%   { margin-left: 0; }
+  25%  { margin-left: 20px; }
+  75%  { margin-left: -20px; }
+  100% { margin-left: 0; }
+}
+
 @layer utilities {
   .prose-terminal h1,
   .prose-terminal h2,

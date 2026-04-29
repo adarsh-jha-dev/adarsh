@@ -4,6 +4,8 @@ import { siteConfig } from "@/lib/config";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
 import { CommandPalette } from "@/components/command-palette";
+import { CursorTrail } from "@/components/cursor-trail";
+import { TerminalModeProvider } from "@/lib/terminal-mode-context";
 import "./globals.css";
 
 const jetbrains = JetBrains_Mono({
@@ -58,11 +60,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${jetbrains.variable} ${inter.variable}`}>
       <body className="crt antialiased">
-        <div className="fixed inset-0 grid-bg pointer-events-none -z-10" />
-        <Nav />
-        <main className="min-h-[calc(100vh-200px)]">{children}</main>
-        <Footer />
-        <CommandPalette />
+        <TerminalModeProvider>
+          <div className="fixed inset-0 grid-bg pointer-events-none -z-10" />
+          <CursorTrail />
+          <Nav />
+          <main className="min-h-[calc(100vh-200px)]">{children}</main>
+          <Footer />
+          <CommandPalette />
+        </TerminalModeProvider>
       </body>
     </html>
   );
