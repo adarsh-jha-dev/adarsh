@@ -6,8 +6,6 @@ export const metadata: Metadata = {
   description: "What I'm focused on right now.",
 };
 
-const YOUTUBE_VIDEO_ID = "jfKfPfyJRdk"; // lofi hip hop radio — change to your current vibe
-
 export default function NowPage() {
   const updated = "April 2026";
   return (
@@ -41,16 +39,6 @@ export default function NowPage() {
             applied-ML work in the same building.
           </Block>
 
-          <Block heading="reading">
-            <em>The Pragmatic Programmer</em> by Hunt & Thomas — re-reading it now
-            that I have enough real-world experience for it to actually land.
-          </Block>
-
-          <Block heading="watching">
-            <em>Severance</em> S2. Also going deep on 3Blue1Brown&apos;s neural
-            network series when I need to feel smarter than I am.
-          </Block>
-
           <Block heading="now playing">
             <div className="mt-2">
               <NowPlaying />
@@ -59,24 +47,6 @@ export default function NowPage() {
               </p>
             </div>
           </Block>
-
-          <div>
-            <h2 className="text-xs uppercase tracking-widest text-accent font-mono mb-3">
-              // currently vibing to
-            </h2>
-            <div className="relative rounded overflow-hidden border border-line aspect-video">
-              <iframe
-                src={`https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?autoplay=0&rel=0`}
-                title="Currently vibing to"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="w-full h-full"
-              />
-            </div>
-            <p className="mt-2 text-xs text-ink-mute">
-              what&apos;s been on repeat lately
-            </p>
-          </div>
         </div>
       </div>
     </section>

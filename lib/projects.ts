@@ -123,6 +123,6 @@ export const projects: Project[] = [
       "Used react-query as the single source of truth for server state — every mutation paired with explicit invalidation or optimistic update. Appwrite handled the backend so I could focus on the data layer.",
     learnings:
       "Optimistic updates feel like cheating until you have to handle the rollback. Designing the rollback path is the real work.",
-    featured: true,
+    featured: false,
   },
 ];

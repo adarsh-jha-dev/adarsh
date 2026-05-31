@@ -1,6 +1,7 @@
 import { siteConfig } from "@/lib/config";
 
 const stack = {
+  "ai / llm": ["OpenAI", "Anthropic", "Gemini", "RAG", "evals", "streaming", "multi-provider orchestration", "agentic workflows"],
   languages: ["TypeScript", "JavaScript", "Python"],
   frontend: ["React", "Next.js", "Tailwind", "Framer Motion", "shadcn/ui"],
   backend: ["Node.js", "Express", "tRPC", "Convex", "Prisma"],
@@ -41,11 +42,12 @@ export function About() {
               to learn from it.
             </p>
             <p>
-              In 2026 I'm widening the lens. The application layer is
-              familiar territory; the model layer isn't yet. I've started
-              working through PyTorch fundamentals and the math underneath,
-              and I'm building small projects that put models behind APIs I
-              already know how to write.
+              Most of what I do sits between application code and AI models —
+              wiring LLMs into product workflows, building evaluation pipelines,
+              designing multi-provider abstractions, and shipping the UI that
+              makes any of it useful. The interesting problems live in the gap
+              between <span className="text-accent">"the model returned something"</span> and{" "}
+              <span className="text-accent">"the user got value."</span>
             </p>
 
             {/* Stack grid */}

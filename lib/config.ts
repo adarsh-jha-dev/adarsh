@@ -1,13 +1,13 @@
 export const siteConfig = {
   name: "Adarsh Jha",
   handle: "adarsh-jha-dev",
-  role: "full-stack engineer",
+  role: "AI Product Engineer / Full Stack Developer / SDE",
   location: "Kolkata, IN",
   email: "adarshjhaxif@gmail.com",
-  url: "https://adarsh.vercel.app",
+  url: "https://adarsh-psi-flax.vercel.app/",
   description:
-    "Full-stack engineer building scalable web apps with TypeScript, React, and Node. Currently exploring the AI/ML side of the stack.",
-  bio: "I build things for the web. Mostly TypeScript, React, Next.js on the frontend; Node, Express, and the occasional Convex on the backend. Spent the last two years shipping MERN apps end-to-end. In 2026 I'm extending the stack downward — picking up the math, the models, and the infra behind AI.",
+    "AI product engineer shipping production LLM features and agentic systems. Currently building red-teaming infrastructure for NIST, UNESCO, IMDA, and the DoD at Humane Intelligence.",
+  bio: "I build AI-powered products. Currently shipping red-teaming and eval infrastructure at Humane Intelligence. On the side I build projects and developer tools — most recently DiffWatch (AI PR review) and MetaGuard (data governance copilot). TypeScript, Next.js, Python.",
   social: {
     github: "https://github.com/adarsh-jha-dev",
     linkedin: "https://www.linkedin.com/in/adarshjha0410",

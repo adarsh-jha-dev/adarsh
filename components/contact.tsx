@@ -53,9 +53,9 @@ export function Contact() {
               <span className="cursor" />
             </h2>
             <p className="mt-4 text-sm text-ink-dim leading-relaxed max-w-md">
-              Open to full-time opportunities, freelance projects, or just a
-              conversation about something you're building. The fastest way to
-              reach me is below — I usually reply within a day.
+              Available for contract work on AI products — LLM features, evals,
+              agentic systems, AI-powered developer tools. Also open to full-time
+              roles from summer 2026. Fastest path: email.
             </p>
 
             <div className="mt-8 space-y-3 text-xs">

@@ -49,7 +49,7 @@ export function Hero() {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-60" />
             <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
           </span>
-          available for full-time roles · summer 2026
+          available for contract work · open to full-time, summer 2026
         </motion.div>
 
         {/* Massive name */}
