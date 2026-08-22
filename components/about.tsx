@@ -1,13 +1,12 @@
 import { siteConfig } from "@/lib/config";
 
 const stack = {
-  "ai / llm": ["OpenAI", "Anthropic", "Gemini", "RAG", "evals", "streaming", "multi-provider orchestration", "agentic workflows"],
+  "ai / llm": ["LangChain", "LangGraph", "LangSmith", "MCP", "RAG", "evals"],
   languages: ["TypeScript", "JavaScript", "Python"],
-  frontend: ["React", "Next.js", "Tailwind", "Framer Motion", "shadcn/ui"],
-  backend: ["Node.js", "Express", "tRPC", "Convex", "Prisma"],
+  frontend: ["React", "Next.js", "streamlit", "Tailwind", "Framer Motion", "shadcn/ui"],
+  backend: ["Node.js", "Express", "FastAPI", "tRPC", "GraphQL"],
   database: ["PostgreSQL", "MongoDB", "Redis"],
   tools: ["Git", "Docker", "Vercel", "GitHub Actions", "Linux"],
-  learning: ["PyTorch", "Transformers", "LangChain"],
 };
 
 export function About() {
