@@ -1,11 +1,20 @@
 "use client";
 
 import { useState } from "react";
+import { ArrowUpRight, Check, Mail } from "lucide-react";
+
 import { siteConfig } from "@/lib/config";
-import { Send, Mail } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import { GithubIcon, LinkedinIcon, TwitterIcon } from "@/components/icons";
 
 type Status = "idle" | "loading" | "success" | "error";
+
+const elsewhere = [
+  { label: "GitHub", href: siteConfig.social.github, Icon: GithubIcon },
+  { label: "LinkedIn", href: siteConfig.social.linkedin, Icon: LinkedinIcon },
+  { label: "X / Twitter", href: siteConfig.social.twitter, Icon: TwitterIcon },
+];
 
 export function Contact() {
   const [status, setStatus] = useState<Status>("idle");
@@ -13,136 +22,126 @@ export function Contact() {
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    const form = e.currentTarget;
     setStatus("loading");
     setError("");
 
-    const data = new FormData(e.currentTarget);
-    const payload = {
-      name: data.get("name"),
-      email: data.get("email"),
-      message: data.get("message"),
-    };
+    const data = new FormData(form);
 
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({
+          name: data.get("name"),
+          email: data.get("email"),
+          message: data.get("message"),
+        }),
       });
       if (!res.ok) {
-        const j = await res.json().catch(() => ({}));
-        throw new Error(j.error ?? "failed to send");
+        const body = await res.json().catch(() => ({}));
+        throw new Error(body.error ?? "Something went wrong.");
       }
       setStatus("success");
-      (e.target as HTMLFormElement).reset();
+      form.reset();
     } catch (err) {
       setStatus("error");
-      setError(err instanceof Error ? err.message : "unknown error");
+      setError(err instanceof Error ? err.message : "Something went wrong.");
     }
   }
 
   return (
-    <section className="py-20 border-t border-line">
-      <div className="mx-auto max-w-5xl px-6">
-        <div className="grid grid-cols-1 md:grid-cols-[1fr_1.2fr] gap-8 md:gap-12">
-          <div>
-            <div className="text-xs text-ink-mute mb-2">// section</div>
-            <h2 className="text-2xl font-medium">
-              <span className="text-ink-mute">$ </span>
-              <span className="text-ink">connect</span>
-              <span className="cursor" />
-            </h2>
-            <p className="mt-4 text-sm text-ink-dim leading-relaxed max-w-md">
-              Available for contract work on AI products — LLM features, evals,
-              agentic systems, AI-powered developer tools. Also open to full-time
-              roles from summer 2026. Fastest path: email.
-            </p>
+    <section id="contact" className="mx-auto max-w-5xl px-6 py-16 md:py-24">
+      <div className="rule" />
 
-            <div className="mt-8 space-y-3 text-xs">
+      <div className="grid grid-cols-1 gap-12 pt-14 md:grid-cols-2 md:gap-16">
+        <div>
+          <span className="eyebrow">Contact</span>
+          <h2 className="display mt-3 text-4xl md:text-5xl">
+            Let&apos;s build
+            <br />
+            something.
+          </h2>
+          <p className="mt-6 max-w-sm text-[15px] leading-relaxed text-muted-foreground">
+            {siteConfig.availability}, and available for contract work on AI
+            products — LLM features, evals, agentic systems, developer tools.
+            The fastest way to reach me is email.
+          </p>
+
+          <a
+            href={`mailto:${siteConfig.email}`}
+            className="group mt-8 inline-flex items-center gap-2.5 text-[15px]"
+          >
+            <Mail className="size-4 text-primary" />
+            <span className="link-grow">{siteConfig.email}</span>
+          </a>
+
+          <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3">
+            {elsewhere.map(({ label, href, Icon }) => (
               <a
-                href={`mailto:${siteConfig.email}`}
-                className="flex items-center gap-3 text-ink-dim hover:text-accent group"
-              >
-                <Mail size={14} className="text-accent" />
-                <span className="link-underline">{siteConfig.email}</span>
-              </a>
-              <a
-                href={siteConfig.social.github}
+                key={label}
+                href={href}
                 target="_blank"
                 rel="noopener"
-                className="flex items-center gap-3 text-ink-dim hover:text-accent"
+                className="group inline-flex items-center gap-2 text-[14px] text-muted-foreground transition-colors hover:text-foreground"
               >
-                <GithubIcon size={14} className="text-accent" />
-                <span className="link-underline">github.com/{siteConfig.handle}</span>
+                <Icon size={15} />
+                {label}
+                <ArrowUpRight className="size-3.5 opacity-0 transition-opacity group-hover:opacity-100" />
               </a>
-              <a
-                href={siteConfig.social.linkedin}
-                target="_blank"
-                rel="noopener"
-                className="flex items-center gap-3 text-ink-dim hover:text-accent"
-              >
-                <LinkedinIcon size={14} className="text-accent" />
-                <span className="link-underline">linkedin.com/in/adarshjha0410</span>
-              </a>
-              <a
-                href={siteConfig.social.twitter}
-                target="_blank"
-                rel="noopener"
-                className="flex items-center gap-3 text-ink-dim hover:text-accent"
-              >
-                <TwitterIcon size={14} className="text-accent" />
-                <span className="link-underline">@Adarsh_Jha_0410</span>
-              </a>
-            </div>
+            ))}
+          </div>
+        </div>
+
+        <form onSubmit={onSubmit} className="rounded-3xl border bg-card p-6 md:p-8">
+          <div className="space-y-5">
+            <Field name="name" label="Name" placeholder="Your name" required />
+            <Field
+              name="email"
+              label="Email"
+              type="email"
+              placeholder="you@company.com"
+              required
+            />
+            <Field
+              name="message"
+              label="Message"
+              placeholder="What are you building?"
+              textarea
+              required
+            />
           </div>
 
-          <form
-            onSubmit={onSubmit}
-            className="bg-bg-elev border border-line p-6 relative"
+          <Button
+            type="submit"
+            variant="primary"
+            className="mt-6 w-full"
+            disabled={status === "loading" || status === "success"}
           >
-            <div className="text-xs text-ink-mute mb-5"># send-message.sh</div>
-
-            <div className="space-y-4">
-              <Field name="name" label="name" placeholder="your name" required />
-              <Field name="email" label="email" type="email" placeholder="you@domain.com" required />
-              <Field
-                name="message"
-                label="message"
-                placeholder="what are you building?"
-                textarea
-                required
-              />
-            </div>
-
-            <button
-              type="submit"
-              disabled={status === "loading"}
-              className="mt-6 w-full bg-accent text-bg py-2.5 text-sm font-medium hover:bg-accent-dim disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
-            >
-              {status === "loading" ? (
-                <span className="inline-flex items-center gap-2">
-                  <span className="animate-pulse">▊</span> sending...
-                </span>
-              ) : (
-                <>
-                  <Send size={13} />
-                  send message
-                </>
-              )}
-            </button>
-
+            {status === "loading" && "Sending…"}
             {status === "success" && (
-              <div className="mt-4 text-xs text-accent flex items-center gap-2">
-                <span>✓</span> message sent. talk soon.
-              </div>
+              <>
+                <Check /> Message sent
+              </>
             )}
-            {status === "error" && (
-              <div className="mt-4 text-xs text-err flex items-center gap-2">
-                <span>✗</span> {error}
-              </div>
+            {(status === "idle" || status === "error") && "Send message"}
+          </Button>
+
+          {/* Reserve the line so the form doesn't jump when a status
+              appears, without putting filler text in the accessibility
+              tree. */}
+          <p
+            aria-live="polite"
+            className={cn(
+              "mt-3 min-h-[1.25rem] text-[13px]",
+              status === "success" && "text-[hsl(var(--success))]",
+              status === "error" && "text-destructive"
             )}
-          </form>
-        </div>
+          >
+            {status === "success" && "Thanks — I'll get back to you soon."}
+            {status === "error" && error}
+          </p>
+        </form>
       </div>
     </section>
   );
@@ -163,20 +162,19 @@ function Field({
   textarea?: boolean;
   required?: boolean;
 }) {
-  const cls =
-    "w-full bg-transparent border border-line focus:border-accent outline-none px-3 py-2 text-sm text-ink placeholder:text-ink-mute transition-colors";
+  const className =
+    "mt-2 w-full rounded-xl border bg-background px-3.5 py-2.5 text-[14px] outline-none transition-colors placeholder:text-muted-foreground/60 focus:border-primary";
+
   return (
     <label className="block">
-      <span className="text-[11px] text-ink-mute mb-1 inline-block">
-        <span className="text-accent">→</span> {label}
-      </span>
+      <span className="text-[13px] font-medium">{label}</span>
       {textarea ? (
         <textarea
           name={name}
           required={required}
           rows={5}
           placeholder={placeholder}
-          className={cls + " resize-none"}
+          className={cn(className, "resize-none")}
         />
       ) : (
         <input
@@ -184,7 +182,7 @@ function Field({
           name={name}
           required={required}
           placeholder={placeholder}
-          className={cls}
+          className={className}
         />
       )}
     </label>

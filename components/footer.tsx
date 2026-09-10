@@ -1,108 +1,93 @@
 import Link from "next/link";
-import { siteConfig } from "@/lib/config";
 import { Mail } from "lucide-react";
+
+import { siteConfig } from "@/lib/config";
 import { GithubIcon, LinkedinIcon, TwitterIcon } from "@/components/icons";
 import { NowPlaying } from "@/components/now-playing";
-import { VisitorCounter } from "@/components/visitor-counter";
+
+const social = [
+  { label: "GitHub", href: siteConfig.social.github, Icon: GithubIcon },
+  { label: "LinkedIn", href: siteConfig.social.linkedin, Icon: LinkedinIcon },
+  { label: "X / Twitter", href: siteConfig.social.twitter, Icon: TwitterIcon },
+];
 
 export function Footer() {
   const year = new Date().getFullYear();
-  return (
-    <footer className="border-t border-line mt-32">
-      <div className="mx-auto max-w-5xl px-6 py-10">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-xs">
-          <div>
-            <div className="text-ink-mute mb-3"># whoami</div>
-            <div className="text-ink">{siteConfig.name}</div>
-            <div className="text-ink-dim mt-1">{siteConfig.role}</div>
-            <div className="text-ink-dim">{siteConfig.location}</div>
-          </div>
 
+  return (
+    <footer className="border-t">
+      <div className="mx-auto max-w-5xl px-6 py-12">
+        <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
           <div>
-            <div className="text-ink-mute mb-3"># navigate</div>
-            <div className="flex flex-col gap-1">
-              <Link href="/projects" className="text-ink-dim hover:text-accent">
-                projects
-              </Link>
-              <Link href="/blog" className="text-ink-dim hover:text-accent">
-                blog
-              </Link>
-              <Link href="/uses" className="text-ink-dim hover:text-accent">
-                uses
-              </Link>
-              <Link href="/now" className="text-ink-dim hover:text-accent">
-                now
-              </Link>
+            <p className="display text-2xl">{siteConfig.name}</p>
+            <p className="mt-1 text-[14px] text-muted-foreground">
+              {siteConfig.role} · {siteConfig.location}
+            </p>
+            <div className="mt-5">
+              <NowPlaying />
             </div>
           </div>
 
-          <div>
-            <div className="text-ink-mute mb-3"># elsewhere</div>
-            <div className="flex items-center gap-4">
+          <div className="flex flex-col gap-3 sm:items-end">
+            <nav className="flex flex-wrap gap-x-5 gap-y-2 text-[14px]">
+              <Link
+                href="/projects"
+                className="text-muted-foreground transition-colors hover:text-foreground"
+              >
+                Work
+              </Link>
+              <Link
+                href="/blog"
+                className="text-muted-foreground transition-colors hover:text-foreground"
+              >
+                Writing
+              </Link>
               <a
-                href={siteConfig.social.github}
+                href={siteConfig.cv}
                 target="_blank"
                 rel="noopener"
-                aria-label="GitHub"
-                className="text-ink-dim hover:text-accent"
+                className="text-muted-foreground transition-colors hover:text-foreground"
               >
-                <GithubIcon size={16} />
+                Résumé
               </a>
-              <a
-                href={siteConfig.social.linkedin}
-                target="_blank"
-                rel="noopener"
-                aria-label="LinkedIn"
-                className="text-ink-dim hover:text-accent"
-              >
-                <LinkedinIcon size={16} />
-              </a>
-              <a
-                href={siteConfig.social.twitter}
-                target="_blank"
-                rel="noopener"
-                aria-label="Twitter"
-                className="text-ink-dim hover:text-accent"
-              >
-                <TwitterIcon size={16} />
-              </a>
+            </nav>
+
+            <div className="flex items-center gap-4 sm:mt-1">
+              {social.map(({ label, href, Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener"
+                  aria-label={label}
+                  className="text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  <Icon size={16} />
+                </a>
+              ))}
               <a
                 href={`mailto:${siteConfig.email}`}
                 aria-label="Email"
-                className="text-ink-dim hover:text-accent"
+                className="text-muted-foreground transition-colors hover:text-foreground"
               >
-                <Mail size={16} />
+                <Mail className="size-4" />
               </a>
-            </div>
-            <div className="mt-4">
-              <a
-                href={`https://github.com/${siteConfig.handle}/adarsh`}
-                target="_blank"
-                rel="noopener"
-                className="text-ink-mute hover:text-accent inline-flex items-center gap-1.5"
-              >
-                <span>{"</>"}</span> view source
-              </a>
-            </div>
-
-            <div className="mt-4">
-              <div className="text-ink-mute mb-2"># now playing</div>
-              <NowPlaying />
             </div>
           </div>
         </div>
 
-        <div className="mt-10 pt-6 border-t border-line flex flex-wrap items-center justify-between gap-3 text-[10px] text-ink-mute">
+        <div className="mt-10 flex flex-wrap items-center justify-between gap-3 border-t pt-6 text-[12px] text-muted-foreground">
           <span>
-            © {year} {siteConfig.name}. built with next.js, deployed on vercel.
+            © {year} {siteConfig.name}
           </span>
-          <div className="flex items-center gap-4">
-            <VisitorCounter />
-            <span className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-              online
-            </span>
-          </div>
+          <a
+            href={`https://github.com/${siteConfig.handle}/adarsh`}
+            target="_blank"
+            rel="noopener"
+            className="transition-colors hover:text-foreground"
+          >
+            Built with Next.js — source on GitHub
+          </a>
         </div>
       </div>
     </footer>

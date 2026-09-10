@@ -1,24 +1,21 @@
 export const siteConfig = {
   name: "Adarsh Jha",
   handle: "adarsh-jha-dev",
-  role: "AI Product Engineer / Full Stack Developer / SDE",
-  location: "Kolkata, IN",
+  role: "AI Product Engineer",
+  location: "Kolkata, India",
   email: "adarshjhaxif@gmail.com",
-  url: "https://adarsh-psi-flax.vercel.app/",
+  url: "https://adarsh-psi-flax.vercel.app",
   description:
     "AI product engineer shipping production LLM features and agentic systems. Currently building red-teaming infrastructure for NIST, UNESCO, IMDA, and the DoD at Humane Intelligence.",
-  bio: "I build AI-powered products. Currently shipping red-teaming and eval infrastructure at Humane Intelligence. On the side I build projects and developer tools — most recently DiffWatch (AI PR review) and MetaGuard (data governance copilot). TypeScript, Next.js, Python.",
+  // One-sentence positioning line used in the hero.
+  tagline:
+    "I build AI products that make it to production — LLM features, evaluation pipelines, and the interfaces that make them useful.",
+  bio: "I work in the gap between application code and AI models: wiring LLMs into real product workflows, building evaluation pipelines, and shipping the UI that makes any of it matter. Currently at Humane Intelligence, where the red-teaming platform I work on is used by NIST, UNESCO, IMDA and the DoD.",
+  availability: "Open to full-time SDE roles from summer 2026",
   social: {
     github: "https://github.com/adarsh-jha-dev",
     linkedin: "https://www.linkedin.com/in/adarshjha0410",
     twitter: "https://twitter.com/Adarsh_Jha_0410",
-    instagram: "https://www.instagram.com/adarsh_glimpse/",
-  },
-  education: {
-    degree: "B.Tech, Computer Science & Engineering",
-    school: "Heritage Institute of Technology, Kolkata",
-    period: "2022 — 2026",
-    cgpa: "9.0+",
   },
   cv: "/cv/Adarsh_SDE.pdf",
 } as const;
@@ -30,33 +27,70 @@ export const experience = [
     role: "Software Engineer",
     period: "Sept 2024 — Present",
     current: true,
+    summary:
+      "Build and ship red-teaming and evaluation infrastructure used by national standards bodies and government agencies.",
     bullets: [
-      "Develop and deploy Red-Teaming projects across the platform",
+      "Develop and deploy red-teaming projects across the platform",
       "Integrate multiple AI model providers into the evaluation pipeline",
       "Implement AI red-teaming features scoped to client requirements",
-      "Clients include NIST, IMDA, UNESCO, and DoD",
     ],
-    stack: ["Next.js", "Vercel", "PostgreSQL", "Docker", "AWS"],
+    clients: ["NIST", "IMDA", "UNESCO", "DoD"],
+    stack: ["Next.js", "PostgreSQL", "Docker", "AWS", "Vercel"],
   },
   {
     company: "1 Percent Verse",
     url: "",
-    role: "Software Development Engineer Intern",
+    role: "SDE Intern",
     period: "Feb 2024 — May 2024",
     current: false,
+    summary:
+      "Owned the integration layer between the frontend and backend services.",
     bullets: [
       "Translated Figma designs into production-ready UI components",
       "Built RESTful APIs and wired them into the application data layer",
-      "Owned the integration layer between frontend and backend services",
     ],
+    clients: [],
     stack: ["React", "Node.js", "Express", "TypeScript", "Supabase"],
   },
 ] as const;
 
+/**
+ * Primary navigation. `hidden` keeps a route live and indexable while
+ * leaving it out of the nav — used for /blog until there's enough
+ * writing there to be worth pointing at.
+ */
 export const navItems = [
-  { href: "/", label: "~/" },
-  { href: "/projects", label: "projects" },
-  { href: "/blog", label: "blog" },
-  { href: "/uses", label: "uses" },
-  { href: "/now", label: "now" },
+  { href: "/projects", label: "Work", hidden: false },
+  { href: "/blog", label: "Writing", hidden: true },
+] as const;
+
+export const skills = [
+  {
+    group: "AI / LLM",
+    items: [
+      "OpenAI",
+      "Anthropic",
+      "Gemini",
+      "RAG",
+      "Evals",
+      "Agentic workflows",
+      "Streaming",
+    ],
+  },
+  {
+    group: "Languages",
+    items: ["TypeScript", "JavaScript", "Python", "SQL"],
+  },
+  {
+    group: "Frontend",
+    items: ["React", "Next.js", "Tailwind", "Motion", "shadcn/ui"],
+  },
+  {
+    group: "Backend",
+    items: ["Node.js", "Express", "tRPC", "Convex", "Prisma", "PostgreSQL"],
+  },
+  {
+    group: "Infra",
+    items: ["Docker", "AWS", "Vercel", "GitHub Actions", "Redis"],
+  },
 ] as const;

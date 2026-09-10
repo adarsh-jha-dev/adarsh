@@ -1,18 +1,18 @@
 import { Hero } from "@/components/hero";
-import { About } from "@/components/about";
-import { Experience } from "@/components/experience";
 import { FeaturedProjects } from "@/components/featured-projects";
-import { GitHubStats } from "@/components/github-stats";
+import { Experience } from "@/components/experience";
+import { About } from "@/components/about";
+import { GitHubActivity } from "@/components/github-activity";
 import { Contact } from "@/components/contact";
 
 export default function Home() {
   return (
     <>
       <Hero />
-      <About />
-      <Experience />
       <FeaturedProjects />
-      <GitHubStats />
+      <Experience />
+      <About />
+      <GitHubActivity />
       <Contact />
     </>
   );

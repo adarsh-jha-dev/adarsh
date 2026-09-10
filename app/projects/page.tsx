@@ -1,30 +1,31 @@
 import type { Metadata } from "next";
+
 import { projects } from "@/lib/projects";
-import { DraggableProjectsGrid } from "@/components/draggable-projects-grid";
+import { ProjectCard } from "@/components/project-card";
 
 export const metadata: Metadata = {
   title: "Projects",
-  description: "Selected projects, side projects, and experiments.",
+  description:
+    "Case studies on AI security tooling, retrieval systems, and data pipelines — with the decisions and measurements behind them.",
 };
 
 export default function ProjectsPage() {
   return (
-    <section className="pt-16 pb-24">
-      <div className="mx-auto max-w-5xl px-6">
-        <div className="text-xs text-ink-mute mb-2">// directory</div>
-        <h1 className="text-4xl font-medium">
-          <span className="text-ink-mute">$ ls </span>
-          <span className="text-ink">~/projects</span>
-          <span className="cursor" />
-        </h1>
-        <p className="mt-4 text-sm text-ink-dim max-w-xl leading-relaxed">
-          A few things I&apos;ve built. Each card opens a case study with the
-          problem, my approach, and what I&apos;d do differently next time.
-        </p>
+    <section className="mx-auto max-w-5xl px-6 pb-8 pt-20 md:pt-28">
+      <span className="eyebrow">Projects</span>
+      <h1 className="display mt-4 text-[clamp(2.5rem,7vw,5rem)]">
+        Selected work
+      </h1>
+      <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-muted-foreground">
+        Each one opens a case study: the problem, the decision worth defending,
+        and what I&apos;d do differently. Where there&apos;s a number to report,
+        it&apos;s measured rather than estimated.
+      </p>
 
-        <div className="mt-10">
-          <DraggableProjectsGrid initialProjects={projects} />
-        </div>
+      <div className="mt-14 border-t">
+        {projects.map((project) => (
+          <ProjectCard key={project.slug} project={project} />
+        ))}
       </div>
     </section>
   );

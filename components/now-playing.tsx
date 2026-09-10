@@ -11,23 +11,29 @@ type Track = {
   songUrl?: string;
 };
 
-function MusicBars() {
+function Bars() {
   return (
-    <span className="flex items-end gap-[2px] h-3">
-      {[0.4, 0.7, 1, 0.6, 0.9].map((delay, i) => (
+    <span className="flex h-3 items-end gap-[2px]" aria-hidden>
+      {[0, 0.15, 0.3, 0.45].map((delay) => (
         <span
-          key={i}
-          className="w-[3px] bg-accent rounded-sm"
+          key={delay}
+          className="w-[2px] rounded-full bg-primary"
           style={{
             height: "100%",
-            animation: `music-bar 0.8s ease-in-out ${delay * 0.3}s infinite alternate`,
+            animation: `now-playing-bar 0.9s ease-in-out ${delay}s infinite alternate`,
           }}
         />
       ))}
       <style>{`
-        @keyframes music-bar {
-          from { transform: scaleY(0.2); }
+        @keyframes now-playing-bar {
+          from { transform: scaleY(0.25); }
           to   { transform: scaleY(1); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          @keyframes now-playing-bar {
+            from { transform: scaleY(0.6); }
+            to   { transform: scaleY(0.6); }
+          }
         }
       `}</style>
     </span>
@@ -37,55 +43,48 @@ function MusicBars() {
 export function NowPlaying() {
   const [track, setTrack] = useState<Track | null>(null);
 
-  const fetchTrack = async () => {
-    try {
-      const res = await fetch("/api/spotify");
-      if (res.ok) setTrack(await res.json());
-    } catch {}
-  };
-
   useEffect(() => {
-    fetchTrack();
-    const id = setInterval(fetchTrack, 30_000);
+    const load = async () => {
+      try {
+        const res = await fetch("/api/now-playing");
+        if (res.ok) setTrack(await res.json());
+      } catch {
+        /* offline or rate-limited — the widget just stays hidden */
+      }
+    };
+    load();
+    const id = setInterval(load, 60_000);
     return () => clearInterval(id);
   }, []);
 
-  if (!track) return null;
-
-  if (!track.isPlaying) {
-    return (
-      <div className="flex items-center gap-2 text-[10px] text-ink-mute">
-        <span className="w-1 h-1 rounded-full bg-ink-mute" />
-        not playing
-      </div>
-    );
-  }
+  if (!track?.isPlaying) return null;
 
   return (
     <a
       href={track.songUrl ?? "#"}
       target="_blank"
       rel="noopener"
-      className="group flex items-center gap-2.5 hover:opacity-80 transition-opacity"
+      className="group inline-flex items-center gap-3 text-[13px]"
     >
       {track.albumArt && (
         <Image
           src={track.albumArt}
-          alt={track.title ?? "album art"}
-          width={28}
-          height={28}
-          className="rounded-sm border border-line"
+          alt=""
+          width={32}
+          height={32}
+          className="rounded-md border"
+          unoptimized
         />
       )}
-      <div className="flex flex-col gap-0.5 min-w-0">
-        <span className="text-[10px] text-ink truncate max-w-[140px]">
+      <span className="flex min-w-0 flex-col">
+        <span className="truncate font-medium transition-colors group-hover:text-primary">
           {track.title}
         </span>
-        <span className="text-[9px] text-ink-mute truncate max-w-[140px]">
+        <span className="truncate text-[12px] text-muted-foreground">
           {track.artist}
         </span>
-      </div>
-      <MusicBars />
+      </span>
+      <Bars />
     </a>
   );
 }

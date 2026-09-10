@@ -1,21 +1,31 @@
-import type { Metadata } from "next";
-import { JetBrains_Mono, Inter } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Inter, Instrument_Serif, JetBrains_Mono } from "next/font/google";
+
 import { siteConfig } from "@/lib/config";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
 import { CommandPalette } from "@/components/command-palette";
-import { CursorTrail } from "@/components/cursor-trail";
-import { TerminalModeProvider } from "@/lib/terminal-mode-context";
+import { ThemeProvider } from "@/components/theme-provider";
+import { AmbientBackground } from "@/components/ui/ambient-background";
 import "./globals.css";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+});
+
+const instrument = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-serif",
+  display: "swap",
+});
 
 const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
-  display: "swap",
-});
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-sans",
   display: "swap",
 });
 
@@ -27,18 +37,21 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   keywords: [
     "Adarsh Jha",
-    "full stack developer",
+    "AI product engineer",
+    "software engineer",
+    "LLM",
     "Next.js",
     "TypeScript",
     "React",
-    "Node.js",
-    "MERN",
-    "Kolkata",
-    "Heritage Institute of Technology",
+    "full stack developer",
   ],
   authors: [{ name: siteConfig.name, url: siteConfig.url }],
   creator: siteConfig.name,
   metadataBase: new URL(siteConfig.url),
+  alternates: {
+    canonical: "/",
+    types: { "application/rss+xml": `${siteConfig.url}/rss.xml` },
+  },
   openGraph: {
     type: "website",
     title: `${siteConfig.name} — ${siteConfig.role}`,
@@ -56,18 +69,43 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#faf9f6" },
+    { media: "(prefers-color-scheme: dark)", color: "#141210" },
+  ],
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en" className={`${jetbrains.variable} ${inter.variable}`}>
-      <body className="crt antialiased">
-        <TerminalModeProvider>
-          <div className="fixed inset-0 grid-bg pointer-events-none -z-10" />
-          <CursorTrail />
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${inter.variable} ${instrument.variable} ${jetbrains.variable}`}
+    >
+      <body className="grain min-h-screen antialiased">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <a
+            href="#main"
+            className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-foreground focus:px-4 focus:py-2 focus:text-sm focus:text-background"
+          >
+            Skip to content
+          </a>
+          <AmbientBackground />
           <Nav />
-          <main className="min-h-[calc(100vh-200px)]">{children}</main>
+          <main id="main">{children}</main>
           <Footer />
           <CommandPalette />
-        </TerminalModeProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
