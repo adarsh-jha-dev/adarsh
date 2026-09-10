@@ -7,6 +7,7 @@ import { Footer } from "@/components/footer";
 import { CommandPalette } from "@/components/command-palette";
 import { ThemeProvider } from "@/components/theme-provider";
 import { AmbientBackground } from "@/components/ui/ambient-background";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const inter = Inter({
@@ -106,6 +107,9 @@ export default function RootLayout({
           <Footer />
           <CommandPalette />
         </ThemeProvider>
+        {/* Vercel Web Analytics — page views and referrers. Inert
+            outside Vercel, so local dev and other hosts are unaffected. */}
+        <Analytics />
       </body>
     </html>
   );
