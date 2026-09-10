@@ -67,30 +67,26 @@ export const navItems = [
 export const skills = [
   {
     group: "AI / LLM",
-    items: [
-      "OpenAI",
-      "Anthropic",
-      "Gemini",
-      "RAG",
-      "Evals",
-      "Agentic workflows",
-      "Streaming",
-    ],
+    items: ["LangChain", "LangGraph", "LangSmith", "MCP", "RAG", "Evals"],
   },
   {
     group: "Languages",
-    items: ["TypeScript", "JavaScript", "Python", "SQL"],
+    items: ["TypeScript", "JavaScript", "Python"],
   },
   {
     group: "Frontend",
-    items: ["React", "Next.js", "Tailwind", "Motion", "shadcn/ui"],
+    items: ["React", "Next.js", "Streamlit", "Tailwind", "Motion", "shadcn/ui"],
   },
   {
     group: "Backend",
-    items: ["Node.js", "Express", "tRPC", "Convex", "Prisma", "PostgreSQL"],
+    items: ["Node.js", "Express", "FastAPI", "tRPC", "GraphQL"],
+  },
+  {
+    group: "Database",
+    items: ["PostgreSQL", "MongoDB", "Redis"],
   },
   {
     group: "Infra",
-    items: ["Docker", "AWS", "Vercel", "GitHub Actions", "Redis"],
+    items: ["Docker", "AWS", "Vercel", "GitHub Actions", "Linux"],
   },
 ] as const;
