@@ -33,6 +33,7 @@ export const experience = [
       "Develop and deploy red-teaming projects across the platform",
       "Integrate multiple AI model providers into the evaluation pipeline",
       "Implement AI red-teaming features scoped to client requirements",
+      "Build the annotation workflow for validating model outputs and red-teaming results",
     ],
     clients: ["NIST", "IMDA", "UNESCO", "DoD"],
     stack: ["Next.js", "PostgreSQL", "Docker", "AWS", "Vercel"],
@@ -44,10 +45,11 @@ export const experience = [
     period: "Feb 2024 — May 2024",
     current: false,
     summary:
-      "Owned the integration layer between the frontend and backend services.",
+      "Built a React + TypeScript frontend for an AI-powered career roadmap platform (similar to roadmap.sh)",
     bullets: [
-      "Translated Figma designs into production-ready UI components",
-      "Built RESTful APIs and wired them into the application data layer",
+      "Translated Figma designs into production UI, rendering AI-generated learning paths and skill trees ",
+      "Designed Supabase-backed REST APIs for user data, progress tracking, and roadmap delivery",
+      "Owned the integration layer wiring AI-generated content into the user-facing application"
     ],
     clients: [],
     stack: ["React", "Node.js", "Express", "TypeScript", "Supabase"],
